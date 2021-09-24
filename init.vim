@@ -44,12 +44,12 @@ Plug 'bling/vim-airline'
 " Calendar ========================================
 Plug 'itchyny/calendar.vim'
 
+" Snippets ========================================
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "Tagbar
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'"
-
-" hot key macros - commenting
-""Plug 'https://github.com/vim-scripts/c.vim.git'
 
 " === Themes ====
 "PaperColor theme
@@ -59,18 +59,31 @@ Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 Plug 'joshdick/onedark.vim'
 "" Plug '~\\.config\\nvim\\plugged\\iceberg.vim'
-Plug 'w0ng/vim-hybrid'
 Plug 'cocopon/iceberg.vim'
+Plug 'w0ng/vim-hybrid'
 Plug 'reedes/vim-colors-pencil'
 Plug 'liuchengxu/space-vim-theme'
 Plug 'iCyMind/NeoSolarized'
+Plug 'HellRok/Fruidle'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'romainl/Apprentice'
+Plug 'jsit/toast.vim'
+Plug 'humanoid-colors/vim-humanoid-colorscheme'
 
 " Syntax hl
 ""Plug 'sheerun/vim-polyglot'
 "
 " airline themes
 Plug 'vim-airline/vim-airline-themes'
-
+"
+" Ultisnips ======================
+let g:UltiSnipsSnippetDirectories=['UltiSnips']
+let g:UltiSnipsSnippetDir = "C:\Users\prokop\.config\nvim\plugged\vim-snippets"
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsListSnippets = '<c-tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"
 " ===============
 "
 "The Silver Searcher front end
@@ -80,7 +93,7 @@ Plug 'rking/ag.vim'
 Plug 'jremmen/vim-ripgrep'
 
 "Gundo
-""Plug 'sjl/Gundo'
+Plug 'sjl/Gundo.vim'
 
 "Gundo for Neovim
 Plug 'simnalamburt/vim-mundo'
@@ -103,20 +116,26 @@ Plug 'tpope/vim-surround'
 "enhanced netrw
 "Plug 'tpope/vim-vinegar'
 
+" Dispatch for builds
+Plug 'tpope/vim-dispatch'
+
 " -------------
 
 "enhanced C++ highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Auto paren
-"" Plug 'C:\\Users\\prokop\\.config\\nvim\\plugged\\lexima'
+""Plug 'C:\\Users\\prokop\\.config\\nvim\\plugged\\lexima'
 Plug 'Raimondi/delimitMate'
 
 "commenting
-""Plug 'tpope/vim-commentary'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'WolfgangMehner/c-support'
-"" Plug 'tomtom/tcomment_vim'
+"Plug 'tpope/vim-commentary'
+" Plug 'scrooloose/nerdcommenter'
+""Plug 'WolfgangMehner/c-support'
+Plug 'tomtom/tcomment_vim'
+
+" hot key macros - commenting
+""Plug 'https://github.com/vim-scripts/c.vim.git'
 
 " detect indent style
 Plug 'ciaranm/detectindent'
@@ -125,16 +144,18 @@ Plug 'ciaranm/detectindent'
 Plug 'scrooloose/nerdtree'
   nnoremap <F3> :NERDTreeToggle<CR>
 
-" autocomplete
+" autocomplete ____________________________________________________
+" ====== deoplete ===========
+"if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"" Plug 'tweekmonster/deoplete-clang2'
-"" Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete-clangx'
 
 " function signatures
-""Plug 'Shougo/echodoc'
+"Plug 'Shougo/echodoc'
 
+" END autocomplete ____________________________________________________
 " org-mode
-""Plug 'jceb/vim-orgmode'
+" >Plug 'jceb/vim-orgmode'
 "  nnoremap <F2> :OrgCheckBoxToggle<CR>
 
 " Enhanced Search by Selection ====================
@@ -150,18 +171,22 @@ Plug 'kien/ctrlp.vim'
 "Plug 'dense-analysis/ale'
 
 " Markdown ========================================
-""Plug 'gabrielelana/vim-markdown'
-""Plug 'plasticboy/vim-markdown'
+Plug 'gabrielelana/vim-markdown'
+"Plug 'tpope/vim-markdown'
 
 " Tables ==========================================
-Plug 'dhruvasagar/vim-table-mode'
-"" >> Plug 'godlygeek/tabular'
+"""" Plug 'dhruvasagar/vim-table-mode'
+
+" Tables + Markdown ===============================
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " speeddating rqd by orgmode
-"=Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
+ inoremap <F6> <C-R>=strftime("<%m/%d/%Y> ")<CR>
 
 " vimwiki =========================================
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+Plug 'vimwiki/vimwiki', { 'branch': 'master' }
   ""let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
   " Don't use vimwiki filetype outside of the wiki path
   let g:vimwiki_global_ext = 0
@@ -170,6 +195,12 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
   let g:vimwiki_list = [wiki]
   let g:vimwiki_use_calendar = 1
 
+" VOoM
+Plug 'vim-scripts/VOoM'
+
+" startup time checker ============================
+"" Plug 'dstein64/vim-startuptime'
+ 
 " Initialize plugin system
 call plug#end()
 " Reload init and call :PlugInstall
@@ -183,41 +214,69 @@ call plug#end()
 
  let g:airline#extensions#bufferline#enabled = 1
 
- " vim-jedi ========================================
-""let g:jedi#completions_command = "<C-Space>"
 
-" vimwiki ==========================================
-
-" deoplete startup
+""  ================== deoplete startup ================
 let g:deoplete#enable_at_startup = 1
 
-let g:deoplete#auto_complete_delay = 150
-let g:deoplete#auto_refresh_delay = 1000
+"let g:deoplete#auto_complete_delay = 150  " obsolete
+"let g:deoplete#auto_refresh_delay = 1000  " obsolete
 let g:deoplete#enable_camel_case = 1
 
-"" set tab complete
-""inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" set tab complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-"" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
-" deoplete auto select option
-set completeopt+=noinsert
+"deoplete auto select option
+set completeopt=menu,noinsert
+"set completeopt+=noinsert
+set pumheight=8     " maximum number of items in completion popup
+
+
+"deoplete-clangx config =========================
+
+" Change clang binary path
+call deoplete#custom#var('clangx', 'clang_binary', 'C:/Program Files/LLVM/bin/clang' )   "'/usr/local/bin/clang')
+
+" Change clang options
+call deoplete#custom#var('clangx', 'default_c_options', '')
+call deoplete#custom#var('clangx', 'default_cpp_options', '')
+
+" ==================== end deoplete ==================
+
+
+" echodoc config =====================================
+set cmdheight=2
+""neovim's floating text feature.
+let g:echodoc#enable_at_startup=1
+let g:echodoc#type='echo' " 'floating'
+" To use a custom highlight for the float window,
+" change Pmenu to your highlight group
+""highlight link EchoDocFloat Pmenu
+"set shortmess+=c            " don't show completion number in status
+set completeopt-=preview    " don't open preview window when completing
+set noshowmode              " disable status mode indicator and replace with a fake
+autocmd InsertEnter * echohl ModeMSG | echo "-- INSERT --" | echohl None
+autocmd InsertLeave * echo ""
 
 "" gutentag status ===================================
 "" set statusline+=%{gutentags#statusline()}
 let g:gutentags_define_advanced_commands = 1
 
 "" Exuberant Ctags path
-let g:tagbar_ctags_bin="c:/Users/prokop/myTools/ctags.exe"
-
+let g:tagbar_ctags_bin= "c:/Users/prokop/myTools/ctags.exe"
+"c:/Users/prokop/scoop/shims/ctags.exe"
 nnoremap <F4> :TagbarToggle<CR>
 " TagBar{{{
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 "}}}
+
+" set cursor column and row indicator (crosshairs)
+set cursorline cursorcolumn
 
 " ignore case in searches
 set ic
@@ -236,7 +295,8 @@ let $TMPDIR = "c:\workdir\tmp"
 set autoread
 "
 " Set python version
-let g:python3_host_prog="C:/Users/prokop/AppData/Local/Programs/Python/Python37-32/python.EXE"
+""let g:python3_host_prog="C:/Users/prokop/scoop/apps/python/current/python.exe"
+let g:python3_host_prog="C:/Users/prokop/AppData/Local/Programs/Python/Python37/python.EXE"
 """C:/Python37/python.exe"
 "let g:python3_host_prog="C:/Users/prokop/scoop/shims/python.exe"
 
@@ -289,9 +349,10 @@ endfunction
 
 " Find all in file ----------------------------------------------------------------- {{{
 " ================================================================
-" Map F4 to search for all occur in current file
-"map <F2> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <BAR> copen<CR>
+" Map F2 to search for all occur in current file
 map <F2> :Rg<CR>
+map <S-F2> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <BAR> copen<CR>
+
 
 "color defs
 let s:brown = "905532"
@@ -430,9 +491,11 @@ set cursorline
 
 
 set termguicolors
-colo PaperColor
+"colo PaperColor
+colo space_vim_theme
 "colo Molokai
-set background=light
+"set background=light
+set background=dark
 ""colo solarized
 "colo iceberg
 
@@ -482,3 +545,6 @@ vnoremap <leader>P "+P
 " Window splitting
 set splitbelow
 set splitright
+
+" Compile Femap on windows:
+set makeprg=devenv
